@@ -581,7 +581,7 @@ ${anexos.length ? `<p class="h">Anexos</p>${ol(anexos)}` : ""}
 
   $("btn-word").addEventListener("click", () => {
     const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>${esc(DOCS[state.current].tab)}</title>
-<style>@page{size:21.59cm 27.94cm;margin:2.5cm 2.2cm}body{font-family:"Times New Roman",serif;font-size:12pt;line-height:1.5}p,li{text-align:justify;margin:0 0 10pt}.left{text-align:left}.h{font-weight:bold;text-align:center;text-transform:uppercase;margin-top:14pt}.ref div{margin:0}.vacio{background:#fff1b8}.linea{border-top:1px solid #000;width:6cm;margin-top:40pt}</style></head><body>${paperEl.innerHTML}</body></html>`;
+<style>@page{size:21.59cm 27.94cm;margin:2.5cm 2.2cm}body{font-family:"Times New Roman",serif;font-size:12pt;line-height:1.5}p,li{text-align:justify;margin:0 0 10pt}.left{text-align:left}.h{font-weight:bold;text-align:center;text-transform:uppercase;margin-top:14pt}.ref div{margin:0}.vacio{background:#fff1b8}.linea{border-top:1px solid #000;width:6cm;margin-top:40pt}</style></head><body>${paperEl.innerHTML}<\/body><\/html>`;
     const blob = new Blob(["﻿", html], { type: "application/msword" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
