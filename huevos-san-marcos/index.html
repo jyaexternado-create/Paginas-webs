@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huevos Criollos San Marcos</title>
+<meta name="description" content="Huevos criollos frescos en Agustín Codazzi, Cesar. Empaques de 6, 12 y 20 huevos. Sepáralos por WhatsApp y recógelos en nuestro local.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='35' rx='22' ry='27' fill='%23f3e3c3' stroke='%237a4a22' stroke-width='3'/%3E%3Ccircle cx='32' cy='40' r='10' fill='%23f2a516'/%3E%3C/svg%3E">
+<style>
+  /* ============================================================
+     COLORES Y TIPOGRAFÍA
+     ============================================================ */
+  :root {
+    --crema: #fbf5e9;
+    --crema-2: #f3e7cf;
+    --cascara: #ead6b0;
+    --yema: #f2a516;
+    --yema-osc: #d9860a;
+    --tierra: #5b3a1e;
+    --tierra-2: #7a4a22;
+    --verde: #3f6b35;
+    --verde-claro: #e3eedb;
+    --texto: #3a2a1a;
+    --texto-suave: #6e5a44;
+    --blanco: #fffdf8;
+    --sombra: 0 10px 30px rgba(91, 58, 30, .12);
+    --radio: 18px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Nunito", system-ui, sans-serif;
+    color: var(--texto);
+    background: var(--crema);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.15; color: var(--tierra); }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: .6rem; }
+  .contenedor { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  section { padding: clamp(56px, 8vw, 96px) 0; }
+  .eyebrow {
+    display: inline-block; font-weight: 800; font-size: .8rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--verde); margin-bottom: .5rem;
+  }
+  .intro { color: var(--texto-suave); max-width: 640px; font-size: 1.08rem; }
+  .centrado { text-align: center; }
+  .centrado .intro { margin-inline: auto; }
+
+  /* Botones */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+    padding: .9rem 1.5rem; border-radius: 999px; font-weight: 800; text-decoration: none;
+    border: 2px solid transparent; cursor: pointer; font-size: 1rem; font-family: inherit;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-yema { background: var(--yema); color: var(--tierra); box-shadow: 0 6px 18px rgba(242,165,22,.35); }
+  .btn-yema:hover { background: var(--yema-osc); }
+  .btn-whatsapp { background: #25d366; color: #fff; box-shadow: 0 6px 18px rgba(37,211,102,.3); }
+  .btn-whatsapp:hover { background: #1ebe5b; }
+  .btn-borde { border-color: var(--tierra); color: var(--tierra); background: transparent; }
+  .btn-borde:hover { background: var(--tierra); color: var(--crema); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+
+  /* ============================================================
+     ESPACIOS PARA IMÁGENES
+     Si la foto no existe todavía, se muestra un recuadro que indica
+     el nombre del archivo que debes poner en la carpeta /imagenes.
+     ============================================================ */
+  .foto {
+    position: relative; overflow: hidden; border-radius: var(--radio);
+    background:
+      repeating-linear-gradient(45deg, rgba(122,74,34,.05) 0 12px, transparent 12px 24px),
+      var(--crema-2);
+    border: 2px dashed var(--cascara);
+  }
+  .foto img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
+  .foto.cargada { border-style: solid; border-color: transparent; }
+  .foto .aviso-foto {
+    position: absolute; inset: 0; display: grid; place-content: center; text-align: center;
+    padding: 1rem; color: var(--texto-suave); font-size: .9rem; gap: .35rem;
+  }
+  .foto .aviso-foto strong { color: var(--tierra-2); font-size: 1rem; }
+  .foto .aviso-foto code {
+    background: var(--blanco); padding: .15rem .5rem; border-radius: 6px; font-size: .82rem;
+    justify-self: center;
+  }
+  .foto .aviso-foto svg { width: 42px; height: 42px; justify-self: center; opacity: .55; }
+
+  /* Espacios de texto pendientes de completar */
+  .por-completar {
+    background: #fff4cc; border: 2px dashed var(--yema); border-radius: 10px;
+    padding: .2rem .55rem; font-weight: 800; color: var(--tierra);
+  }
+
+  /* ============================================================
+     ENCABEZADO
+     ============================================================ */
+  .franja {
+    background: var(--tierra); color: var(--crema); text-align: center;
+    font-size: .88rem; padding: .5rem 16px; font-weight: 600;
+  }
+  header.barra {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,245,233,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--cascara);
+  }
+  .barra .contenedor { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .7rem 0; }
+  .marca { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+  .marca svg { width: 40px; height: 40px; }
+  .marca span { font-family: "Fraunces", serif; font-weight: 800; font-size: 1.35rem; color: var(--tierra); line-height: 1; }
+  .marca small { display: block; font-family: "Nunito", sans-serif; font-size: .7rem; font-weight: 800; letter-spacing: .14em; color: var(--verde); text-transform: uppercase; margin-top: 3px; }
+  nav.menu { display: flex; gap: 1.4rem; }
+  nav.menu a { text-decoration: none; font-weight: 700; color: var(--texto-suave); }
+  nav.menu a:hover { color: var(--tierra); }
+  .barra .btn { padding: .6rem 1.1rem; font-size: .92rem; }
+  @media (max-width: 860px) { nav.menu { display: none; } }
+  @media (max-width: 420px) { .barra .btn span { display: none; } .barra .btn { padding: .6rem; } }
+
+  /* ============================================================
+     PORTADA
+     ============================================================ */
+  .portada { padding-top: clamp(40px, 6vw, 80px); position: relative; overflow: hidden; }
+  .portada .contenedor { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .portada h1 { font-size: clamp(2.3rem, 6vw, 4rem); margin-bottom: 1rem; }
+  .portada h1 em { font-style: normal; color: var(--yema-osc); }
+  .portada p.lead { font-size: 1.15rem; color: var(--texto-suave); margin-bottom: 1.6rem; max-width: 520px; }
+  .acciones { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .sellos { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem; }
+  .sello {
+    background: var(--blanco); border: 1px solid var(--cascara); border-radius: 999px;
+    padding: .4rem .9rem; font-size: .88rem; font-weight: 700; color: var(--tierra-2);
+  }
+  .portada .foto { aspect-ratio: 4 / 4.3; box-shadow: var(--sombra); transform: rotate(1.5deg); }
+  .portada .burbuja {
+    position: absolute; z-index: 2; left: -14px; bottom: 22px; transform: rotate(-4deg);
+    background: var(--yema); color: var(--tierra); font-weight: 800; padding: .8rem 1.1rem;
+    border-radius: 16px; box-shadow: var(--sombra); font-size: .95rem; line-height: 1.25;
+  }
+  .portada .burbuja b { display: block; font-family: "Fraunces", serif; font-size: 1.5rem; }
+  .portada-foto { position: relative; }
+  @media (max-width: 860px) {
+    .portada .contenedor { grid-template-columns: 1fr; }
+    .portada .burbuja { left: 8px; }
+  }
+
+  /* ============================================================
+     POR QUÉ CRIOLLOS
+     ============================================================ */
+  .razones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 2.4rem; }
+  .razon {
+    background: var(--blanco); border-radius: var(--radio); padding: 1.5rem 1.3rem;
+    border: 1px solid var(--cascara);
+  }
+  .razon .icono {
+    width: 52px; height: 52px; border-radius: 14px; background: var(--verde-claro);
+    display: grid; place-items: center; margin-bottom: .9rem;
+  }
+  .razon .icono svg { width: 28px; height: 28px; color: var(--verde); }
+  .razon h3 { font-size: 1.2rem; margin-bottom: .35rem; }
+  .razon p { color: var(--texto-suave); font-size: .97rem; }
+  @media (max-width: 960px) { .razones { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .razones { grid-template-columns: 1fr; } }
+
+  /* ============================================================
+     PRODUCTOS
+     ============================================================ */
+  #productos { background: var(--crema-2); }
+  .productos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 2.4rem; align-items: stretch; }
+  .producto {
+    background: var(--blanco); border-radius: 22px; overflow: hidden; box-shadow: var(--sombra);
+    display: flex; flex-direction: column; position: relative; border: 2px solid transparent;
+  }
+  .producto.destacado { border-color: var(--yema); }
+  .producto .foto { border-radius: 0; border: 0; border-bottom: 2px dashed var(--cascara); aspect-ratio: 4 / 3; }
+  .producto .foto.cargada { border-bottom: 0; }
+  .etiqueta {
+    position: absolute; top: 14px; left: 14px; z-index: 3; font-weight: 800; font-size: .78rem;
+    letter-spacing: .06em; text-transform: uppercase; padding: .35rem .75rem; border-radius: 999px;
+  }
+  .etiqueta.verde { background: var(--verde); color: #fff; }
+  .etiqueta.yema { background: var(--yema); color: var(--tierra); }
+  .producto .cuerpo { padding: 1.4rem 1.4rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+  .producto h3 { font-size: 1.45rem; }
+  .producto .uso { color: var(--texto-suave); font-size: .95rem; margin: .3rem 0 1rem; }
+  .precio { font-family: "Fraunces", serif; font-weight: 800; font-size: 2.3rem; color: var(--tierra); line-height: 1; }
+  .precio small { font-family: "Nunito", sans-serif; font-size: .9rem; font-weight: 700; color: var(--texto-suave); }
+  .por-unidad { margin-top: .4rem; font-size: .9rem; color: var(--verde); font-weight: 800; }
+  .producto .btn { margin-top: auto; width: 100%; }
+  .producto .espacio { flex: 1; min-height: 1.2rem; }
+  .nota-ahorro {
+    margin-top: 2rem; text-align: center; background: var(--blanco); border-radius: var(--radio);
+    padding: 1.1rem 1.4rem; border: 2px dashed var(--yema); font-weight: 700; color: var(--tierra);
+  }
+  @media (max-width: 900px) { .productos { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; } }
+
+  /* ============================================================
+     ARMA TU PEDIDO
+     ============================================================ */
+  .pedido { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 56px); align-items: start; }
+  .tarjeta-pedido { background: var(--blanco); border-radius: 22px; padding: 1.6rem; box-shadow: var(--sombra); border: 1px solid var(--cascara); }
+  .linea { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px dashed var(--cascara); }
+  .linea:last-of-type { border-bottom: 0; }
+  .linea b { display: block; color: var(--tierra); }
+  .linea span { font-size: .9rem; color: var(--texto-suave); }
+  .contador { display: flex; align-items: center; gap: .3rem; background: var(--crema); border-radius: 999px; padding: .25rem; }
+  .contador button {
+    width: 38px; height: 38px; border-radius: 50%; border: 0; background: var(--blanco); cursor: pointer;
+    font-size: 1.3rem; font-weight: 800; color: var(--tierra); box-shadow: 0 2px 6px rgba(91,58,30,.12);
+  }
+  .contador button:hover { background: var(--yema); }
+  .contador output { min-width: 28px; text-align: center; font-weight: 800; font-size: 1.1rem; }
+  .total {
+    display: flex; justify-content: space-between; align-items: baseline; margin: 1.2rem 0 1rem;
+    padding-top: 1rem; border-top: 2px solid var(--tierra);
+  }
+  .total .precio { font-size: 2rem; }
+  .resumen-huevos { font-size: .9rem; color: var(--texto-suave); margin-bottom: 1rem; }
+  .tarjeta-pedido label { display: block; font-weight: 700; font-size: .92rem; margin: .6rem 0 .3rem; }
+  .tarjeta-pedido input {
+    width: 100%; padding: .75rem .9rem; border-radius: 12px; border: 2px solid var(--cascara);
+    font: inherit; background: var(--crema);
+  }
+  .tarjeta-pedido input:focus { outline: none; border-color: var(--yema); }
+  .tarjeta-pedido .btn { width: 100%; margin-top: 1rem; }
+  .tarjeta-pedido .btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
+  .aviso-retiro {
+    margin-top: .9rem; font-size: .88rem; color: var(--texto-suave); text-align: center;
+  }
+  .pasos { list-style: none; counter-reset: paso; margin-top: 1.6rem; display: grid; gap: 1.1rem; }
+  .pasos li { counter-increment: paso; display: grid; grid-template-columns: 48px 1fr; gap: 1rem; align-items: start; }
+  .pasos li::before {
+    content: counter(paso); width: 48px; height: 48px; border-radius: 50%;
+    background: var(--yema); color: var(--tierra); font-family: "Fraunces", serif; font-weight: 800;
+    font-size: 1.3rem; display: grid; place-items: center;
+  }
+  .pasos b { display: block; color: var(--tierra); font-size: 1.08rem; }
+  .pasos span { color: var(--texto-suave); }
+  .sin-domicilio {
+    margin-top: 1.8rem; background: var(--verde-claro); border-left: 5px solid var(--verde);
+    padding: 1rem 1.2rem; border-radius: 0 12px 12px 0; color: var(--tierra);
+  }
+  @media (max-width: 860px) { .pedido { grid-template-columns: 1fr; } }
+
+  /* ============================================================
+     FRASE GRANDE
+     ============================================================ */
+  .frase {
+    background: var(--tierra); color: var(--crema); text-align: center;
+    padding: clamp(48px, 7vw, 80px) 0;
+  }
+  .frase blockquote {
+    font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(1.5rem, 4vw, 2.4rem);
+    max-width: 820px; margin-inline: auto; line-height: 1.3;
+  }
+  .frase blockquote em { color: var(--yema); font-style: normal; }
+  .frase p { margin-top: 1rem; opacity: .8; }
+
+  /* ============================================================
+     GALERÍA
+     ============================================================ */
+  .galeria { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 14px; margin-top: 2.2rem; }
+  .galeria .foto:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  @media (max-width: 760px) {
+    .galeria { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  }
+
+  /* ============================================================
+     TESTIMONIOS
+     ============================================================ */
+  #opiniones { background: var(--crema-2); }
+  .testimonios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 2.2rem; }
+  .testimonio { background: var(--blanco); border-radius: var(--radio); padding: 1.5rem; border: 1px solid var(--cascara); }
+  .estrellas { color: var(--yema); letter-spacing: 2px; font-size: 1.1rem; }
+  .testimonio p { margin: .6rem 0 1rem; font-style: italic; }
+  .testimonio b { color: var(--tierra); font-size: .95rem; }
+  .nota-chica { margin-top: 1rem; font-size: .85rem; color: var(--texto-suave); text-align: center; }
+  @media (max-width: 860px) { .testimonios { grid-template-columns: 1fr; } }
+
+  /* ============================================================
+     UBICACIÓN
+     ============================================================ */
+  .ubicacion { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(24px, 5vw, 56px); align-items: stretch; }
+  .datos { display: grid; gap: 1.1rem; margin-top: 1.4rem; }
+  .dato { display: grid; grid-template-columns: 44px 1fr; gap: .9rem; align-items: start; }
+  .dato .icono { width: 44px; height: 44px; border-radius: 12px; background: var(--yema); display: grid; place-items: center; }
+  .dato .icono svg { width: 22px; height: 22px; color: var(--tierra); }
+  .dato b { display: block; color: var(--tierra); }
+  .dato div { color: var(--texto-suave); }
+  .mapa {
+    border-radius: 22px; overflow: hidden; min-height: 340px; box-shadow: var(--sombra);
+    background: var(--crema-2); border: 2px dashed var(--cascara); display: grid; place-items: center;
+    text-align: center; padding: 1.5rem; color: var(--texto-suave);
+  }
+  .mapa iframe { width: 100%; height: 100%; min-height: 340px; border: 0; }
+  .mapa.con-mapa { padding: 0; border: 0; }
+  @media (max-width: 860px) { .ubicacion { grid-template-columns: 1fr; } }
+
+  /* ============================================================
+     PREGUNTAS FRECUENTES
+     ============================================================ */
+  .faq { max-width: 780px; margin: 2rem auto 0; display: grid; gap: 12px; }
+  .faq details { background: var(--blanco); border-radius: 14px; border: 1px solid var(--cascara); padding: 0 1.2rem; }
+  .faq summary {
+    cursor: pointer; padding: 1.1rem 0; font-weight: 800; color: var(--tierra); list-style: none;
+    display: flex; justify-content: space-between; gap: 1rem;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--yema-osc); }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details p { padding-bottom: 1.1rem; color: var(--texto-suave); }
+
+  /* ============================================================
+     LLAMADO FINAL Y PIE
+     ============================================================ */
+  .llamado { text-align: center; background: var(--yema); }
+  .llamado h2 { color: var(--tierra); }
+  .llamado p { max-width: 560px; margin: 0 auto 1.6rem; color: var(--tierra); font-weight: 600; }
+  .llamado .btn-borde:hover { background: var(--tierra); }
+  footer { background: var(--tierra); color: var(--cascara); padding: 2.4rem 0; font-size: .92rem; }
+  footer .contenedor { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; }
+  footer b { color: var(--crema); }
+
+  /* Botón flotante de WhatsApp */
+  .flotante {
+    position: fixed; right: 18px; bottom: 18px; z-index: 60; width: 60px; height: 60px; border-radius: 50%;
+    background: #25d366; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    transition: transform .15s ease;
+  }
+  .flotante:hover { transform: scale(1.08); }
+  .flotante svg { width: 32px; height: 32px; color: #fff; }
+
+  /* Aparición suave al hacer scroll */
+  .revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .revelar.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .revelar { opacity: 1; transform: none; transition: none; }
+    .btn, .flotante { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Íconos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.86 9.86 0 0 0 12.04 2Zm5.8 14.13c-.24.69-1.42 1.32-1.96 1.37-.5.05-1.13.24-3.81-.81-3.2-1.26-5.26-4.54-5.42-4.75-.16-.21-1.29-1.72-1.29-3.28s.82-2.33 1.11-2.65c.29-.32.63-.4.85-.4l.61.01c.2.01.46-.07.72.55.26.63.9 2.19.98 2.35.08.16.13.34.03.55-.11.21-.16.34-.32.53l-.48.56c-.16.16-.32.33-.14.65.19.32.83 1.37 1.78 2.21 1.22 1.09 2.25 1.42 2.57 1.58.32.16.5.13.69-.08.19-.21.79-.93 1-1.25.21-.32.42-.26.71-.16.29.11 1.85.87 2.17 1.03.32.16.53.24.61.37.08.13.08.77-.16 1.46Z"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+  <symbol id="i-tienda" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 10v10h16V10M3 10l2-6h14l2 6M3 10h18M9 20v-6h6v6"/></symbol>
+</svg>
+
+<div class="franja">🥚 Huevos criollos frescos en Agustín Codazzi · Sepáralos por WhatsApp y recógelos en el local</div>
+
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="#inicio" aria-label="San Marcos, inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <ellipse cx="32" cy="35" rx="21" ry="26" fill="#f3e3c3" stroke="#7a4a22" stroke-width="3"/>
+        <circle cx="32" cy="40" r="10" fill="#f2a516"/>
+        <path d="M22 18c3-4 7-6 10-6" stroke="#fffdf8" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </svg>
+      <span>San Marcos<small>Huevos criollos</small></span>
+    </a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#productos">Productos</a>
+      <a href="#pedido">Haz tu pedido</a>
+      <a href="#galeria">Galería</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-whatsapp js-whatsapp" href="#" target="_blank" rel="noopener">
+      <svg aria-hidden="true"><use href="#i-whatsapp"/></svg><span>Escríbenos</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ PORTADA ============================ -->
+<section class="portada" id="inicio">
+  <div class="contenedor">
+    <div>
+      <span class="eyebrow">Agustín Codazzi, Cesar</span>
+      <h1>El sabor de los huevos <em>de antes</em>, fresquitos para tu mesa</h1>
+      <p class="lead">En San Marcos vendemos huevos criollos de verdad: yema bien amarilla, cáscara fuerte y ese sabor de campo que se nota desde el primer bocado.</p>
+      <div class="acciones">
+        <a class="btn btn-yema" href="#productos">Ver precios</a>
+        <a class="btn btn-borde" href="#pedido">Separar mi pedido</a>
+      </div>
+      <div class="sellos">
+        <span class="sello">🐔 100 % criollos</span>
+        <span class="sello">📍 Producto local</span>
+        <span class="sello">🌅 Frescos cada semana</span>
+      </div>
+    </div>
+    <div class="portada-foto">
+      <!-- ✏️ FOTO PRINCIPAL: guarda tu foto como imagenes/portada.jpg -->
+      <figure class="foto">
+        <img src="imagenes/portada.jpg" alt="Huevos criollos San Marcos" loading="eager">
+      </figure>
+      <div class="burbuja">Desde<b>$10.000</b>el empaque de 6</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ POR QUÉ CRIOLLOS ============================ -->
+<section id="por-que">
+  <div class="contenedor centrado">
+    <span class="eyebrow">¿Por qué criollos?</span>
+    <h2>No es cualquier huevo. Es huevo criollo.</h2>
+    <p class="intro">La diferencia se ve en la sartén y se siente en el paladar. Una vez los pruebas, no vuelves atrás.</p>
+  </div>
+  <div class="contenedor razones">
+    <article class="razon revelar">
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="5"/><ellipse cx="12" cy="12" rx="9" ry="10"/></svg></div>
+      <h3>Yema más amarilla</h3>
+      <p>Color intenso y natural que le da vida a tus arepas con huevo, tortas y desayunos.</p>
+    </article>
+    <article class="razon revelar">
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21c-4-3-7-7-7-11a7 7 0 0 1 14 0c0 4-3 8-7 11Z"/><path d="M12 8v6M9 11h6"/></svg></div>
+      <h3>Sabor de campo</h3>
+      <p>De gallinas criollas que caminan, picotean y comen como se ha hecho siempre en el campo.</p>
+    </article>
+    <article class="razon revelar">
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div>
+      <h3>Siempre frescos</h3>
+      <p>Rotamos el producto constantemente para que te lleves huevos recién recogidos.</p>
+    </article>
+    <article class="razon revelar">
+      <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="M10 21v-6h4v6"/></svg></div>
+      <h3>Hecho en Codazzi</h3>
+      <p>Comprar aquí es apoyar a productores de nuestra tierra. Lo de aquí, para los de aquí.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================ PRODUCTOS ============================ -->
+<section id="productos">
+  <div class="contenedor centrado">
+    <span class="eyebrow">Nuestros empaques</span>
+    <h2>Elige el tamaño de tu antojo</h2>
+    <p class="intro">Entre más grande el empaque, más barato te sale cada huevo. Haz cuentas: el de 20 es el favorito de las familias.</p>
+  </div>
+  <div class="contenedor">
+    <div class="productos">
+      <article class="producto revelar">
+        <!-- ✏️ FOTO: imagenes/empaque-6.jpg -->
+        <figure class="foto"><img src="imagenes/empaque-6.jpg" alt="Empaque de 6 huevos criollos" loading="lazy"></figure>
+        <div class="cuerpo">
+          <h3>Empaque de 6</h3>
+          <p class="uso">Ideal para probarlos por primera vez o para el desayuno de la pareja.</p>
+          <div class="precio">$10.000 <small>COP</small></div>
+          <div class="por-unidad">≈ $1.667 por huevo</div>
+          <div class="espacio"></div>
+          <a class="btn btn-borde js-agregar" href="#pedido" data-producto="6">Agregar al pedido</a>
+        </div>
+      </article>
+
+      <article class="producto destacado revelar">
+        <span class="etiqueta yema">⭐ Más vendido</span>
+        <!-- ✏️ FOTO: imagenes/empaque-12.jpg -->
+        <figure class="foto"><img src="imagenes/empaque-12.jpg" alt="Empaque de 12 huevos criollos" loading="lazy"></figure>
+        <div class="cuerpo">
+          <h3>Empaque de 12</h3>
+          <p class="uso">La docena de siempre: alcanza para toda la semana en casa.</p>
+          <div class="precio">$15.000 <small>COP</small></div>
+          <div class="por-unidad">$1.250 por huevo · ahorras $5.000 frente a 2 de 6</div>
+          <div class="espacio"></div>
+          <a class="btn btn-yema js-agregar" href="#pedido" data-producto="12">Agregar al pedido</a>
+        </div>
+      </article>
+
+      <article class="producto revelar">
+        <span class="etiqueta verde">💰 Mejor precio</span>
+        <!-- ✏️ FOTO: imagenes/empaque-20.jpg -->
+        <figure class="foto"><img src="imagenes/empaque-20.jpg" alt="Empaque de 20 huevos criollos" loading="lazy"></figure>
+        <div class="cuerpo">
+          <h3>Empaque de 20</h3>
+          <p class="uso">Para familias grandes, negocios de comida y los que no se quieren quedar sin huevos.</p>
+          <div class="precio">$18.000 <small>COP</small></div>
+          <div class="por-unidad">¡Solo $900 por huevo!</div>
+          <div class="espacio"></div>
+          <a class="btn btn-borde js-agregar" href="#pedido" data-producto="20">Agregar al pedido</a>
+        </div>
+      </article>
+    </div>
+    <p class="nota-ahorro">🥚 Llevando el empaque de 20 pagas casi <strong>la mitad por huevo</strong> que en el de 6. ¡Rinde más y te sale mejor!</p>
+  </div>
+</section>
+
+<!-- ============================ ARMA TU PEDIDO ============================ -->
+<section id="pedido">
+  <div class="contenedor pedido">
+    <div>
+      <span class="eyebrow">Separa sin filas</span>
+      <h2>Arma tu pedido y pasa a recogerlo</h2>
+      <p class="intro">Escoge tus empaques, envíanos el pedido por WhatsApp y te lo tenemos listo cuando llegues. Así no te quedas sin los tuyos.</p>
+      <ol class="pasos">
+        <li><div><b>Elige tus empaques</b><span>Suma las cantidades y mira el total al instante.</span></div></li>
+        <li><div><b>Envíalo por WhatsApp</b><span>Te confirmamos disponibilidad y la hora de retiro.</span></div></li>
+        <li><div><b>Recoge en el local</b><span>Pagas al recibir y te llevas tus huevos fresquitos.</span></div></li>
+      </ol>
+      <div class="sin-domicilio">
+        <strong>🏪 Por ahora no hacemos domicilios.</strong> Todas las ventas se entregan directamente en nuestro local en Agustín Codazzi. ¡Así te aseguras de escoger tus huevos y conocernos en persona!
+      </div>
+    </div>
+
+    <div class="tarjeta-pedido revelar">
+      <div class="linea">
+        <div><b>Empaque de 6</b><span>$10.000 c/u</span></div>
+        <div class="contador" data-producto="6">
+          <button type="button" data-paso="-1" aria-label="Quitar un empaque de 6">−</button>
+          <output aria-live="polite">0</output>
+          <button type="button" data-paso="1" aria-label="Agregar un empaque de 6">+</button>
+        </div>
+      </div>
+      <div class="linea">
+        <div><b>Empaque de 12</b><span>$15.000 c/u</span></div>
+        <div class="contador" data-producto="12">
+          <button type="button" data-paso="-1" aria-label="Quitar un empaque de 12">−</button>
+          <output aria-live="polite">0</output>
+          <button type="button" data-paso="1" aria-label="Agregar un empaque de 12">+</button>
+        </div>
+      </div>
+      <div class="linea">
+        <div><b>Empaque de 20</b><span>$18.000 c/u</span></div>
+        <div class="contador" data-producto="20">
+          <button type="button" data-paso="-1" aria-label="Quitar un empaque de 20">−</button>
+          <output aria-live="polite">0</output>
+          <button type="button" data-paso="1" aria-label="Agregar un empaque de 20">+</button>
+        </div>
+      </div>
+
+      <div class="total">
+        <b>Total</b>
+        <div class="precio" id="total">$0</div>
+      </div>
+      <p class="resumen-huevos" id="resumen">Aún no has agregado empaques.</p>
+
+      <label for="nombre">Tu nombre</label>
+      <input id="nombre" type="text" placeholder="Ej.: María Pérez" autocomplete="name">
+      <label for="hora">¿Cuándo pasas a recoger?</label>
+      <input id="hora" type="text" placeholder="Ej.: hoy a las 5 p. m.">
+
+      <button class="btn btn-whatsapp" id="enviar" type="button" disabled>
+        <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>Enviar pedido por WhatsApp
+      </button>
+      <p class="aviso-retiro">Retiro en el local · Pago al recoger</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FRASE ============================ -->
+<div class="frase">
+  <div class="contenedor">
+    <blockquote>“Un buen día empieza con un buen desayuno, y un buen desayuno empieza con <em>huevos criollos San Marcos</em>.”</blockquote>
+    <p>Del campo cesarense a tu cocina.</p>
+  </div>
+</div>
+
+<!-- ============================ GALERÍA ============================ -->
+<section id="galeria">
+  <div class="contenedor centrado">
+    <span class="eyebrow">Galería</span>
+    <h2>Así son nuestros huevos</h2>
+    <p class="intro">Mira el color de esas yemas. Fotos reales de nuestro producto y de nuestro local.</p>
+  </div>
+  <div class="contenedor galeria">
+    <!-- ✏️ FOTOS DE GALERÍA: imagenes/galeria-1.jpg ... galeria-5.jpg -->
+    <figure class="foto revelar"><img src="imagenes/galeria-1.jpg" alt="Huevos criollos San Marcos" loading="lazy"></figure>
+    <figure class="foto revelar"><img src="imagenes/galeria-2.jpg" alt="Yema de huevo criollo" loading="lazy"></figure>
+    <figure class="foto revelar"><img src="imagenes/galeria-3.jpg" alt="Gallinas criollas" loading="lazy"></figure>
+    <figure class="foto revelar"><img src="imagenes/galeria-4.jpg" alt="Nuestro local en Agustín Codazzi" loading="lazy"></figure>
+    <figure class="foto revelar"><img src="imagenes/galeria-5.jpg" alt="Desayuno con huevos criollos" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- ============================ OPINIONES ============================ -->
+<section id="opiniones">
+  <div class="contenedor centrado">
+    <span class="eyebrow">Lo que dicen nuestros clientes</span>
+    <h2>Los vecinos ya lo saben</h2>
+  </div>
+  <div class="contenedor">
+    <!-- ✏️ OPINIONES: reemplaza estos textos con comentarios REALES de tus clientes (con su permiso). -->
+    <div class="testimonios">
+      <figure class="testimonio revelar">
+        <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
+        <p><span class="por-completar">Escribe aquí la opinión de un cliente real</span></p>
+        <b>— Nombre del cliente</b>
+      </figure>
+      <figure class="testimonio revelar">
+        <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
+        <p><span class="por-completar">Escribe aquí la opinión de un cliente real</span></p>
+        <b>— Nombre del cliente</b>
+      </figure>
+      <figure class="testimonio revelar">
+        <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
+        <p><span class="por-completar">Escribe aquí la opinión de un cliente real</span></p>
+        <b>— Nombre del cliente</b>
+      </figure>
+    </div>
+    <p class="nota-chica">¿Ya probaste nuestros huevos? Cuéntanos qué te parecieron por WhatsApp.</p>
+  </div>
+</section>
+
+<!-- ============================ UBICACIÓN ============================ -->
+<section id="ubicacion">
+  <div class="contenedor ubicacion">
+    <div>
+      <span class="eyebrow">Visítanos</span>
+      <h2>Te esperamos en el local</h2>
+      <p class="intro">Ven por tus huevos, escógelos tú mismo y llévatelos fresquitos. Atención amable y precio justo.</p>
+      <div class="datos">
+        <div class="dato">
+          <span class="icono"><svg><use href="#i-pin"/></svg></span>
+          <div>
+            <b>Dirección</b>
+            <!-- ✏️ DIRECCIÓN EXACTA: reemplaza el texto amarillo por la dirección del local -->
+            <span class="por-completar">Escribe aquí la dirección exacta</span><br>
+            Agustín Codazzi, Cesar
+          </div>
+        </div>
+        <div class="dato">
+          <span class="icono"><svg><use href="#i-reloj"/></svg></span>
+          <div>
+            <b>Horario de atención</b>
+            <!-- ✏️ HORARIO -->
+            <span class="por-completar">Lunes a sábado: __:__ a __:__</span><br>
+            <span class="por-completar">Domingos y festivos: __:__ a __:__</span>
+          </div>
+        </div>
+        <div class="dato">
+          <span class="icono"><svg><use href="#i-tel"/></svg></span>
+          <div>
+            <b>WhatsApp y llamadas</b>
+            <!-- ✏️ El número se cambia en la configuración al final del archivo (CONFIG.whatsapp) -->
+            <span id="telefono-visible"></span>
+          </div>
+        </div>
+        <div class="dato">
+          <span class="icono"><svg><use href="#i-tienda"/></svg></span>
+          <div>
+            <b>Forma de entrega</b>
+            Solo retiro en el local. No hacemos domicilios.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ MAPA: en Google Maps busca el local → Compartir → Insertar un mapa → copia el
+         enlace que aparece en src="..." y pégalo en CONFIG.mapa al final del archivo. -->
+    <div class="mapa" id="mapa">
+      <div>
+        <svg width="48" height="48" style="opacity:.5;margin:0 auto .5rem;display:block"><use href="#i-pin"/></svg>
+        <strong style="color:var(--tierra-2)">Espacio para el mapa de Google Maps</strong><br>
+        Pega el enlace del mapa en <code>CONFIG.mapa</code> y aparecerá aquí.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PREGUNTAS ============================ -->
+<section id="preguntas" style="background:var(--crema-2)">
+  <div class="contenedor centrado">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2>Resolvemos tus dudas</h2>
+  </div>
+  <div class="contenedor faq">
+    <details>
+      <summary>¿Hacen domicilios?</summary>
+      <p>Por ahora no. Todas las compras se recogen directamente en nuestro local en Agustín Codazzi. Puedes separar tu pedido por WhatsApp para que te lo tengamos listo.</p>
+    </details>
+    <details>
+      <summary>¿Qué diferencia hay entre un huevo criollo y uno de granja?</summary>
+      <p>El huevo criollo viene de gallinas criollas que crecen de forma más natural, con espacio para moverse. Por eso su yema suele ser más amarilla, su sabor más intenso y su cáscara más resistente.</p>
+    </details>
+    <details>
+      <summary>¿Cuál empaque me conviene más?</summary>
+      <p>Si consumes huevo a diario, el de 20 es el más rendidor: cada huevo te sale a $900. El de 12 es perfecto para la semana y el de 6 es ideal para probarlos.</p>
+    </details>
+    <details>
+      <summary>¿Cómo debo guardar los huevos?</summary>
+      <p>En un lugar fresco o en la nevera, sin lavarlos hasta el momento de usarlos. Lávalos justo antes de cocinarlos y procura consumirlos bien cocidos.</p>
+    </details>
+    <details>
+      <summary>¿Puedo separar mis huevos con anticipación?</summary>
+      <p>¡Claro! Usa la sección “Arma tu pedido”, envíanos el mensaje por WhatsApp y te confirmamos la hora en que puedes pasar.</p>
+    </details>
+    <details>
+      <summary>¿Qué medios de pago reciben?</summary>
+      <!-- ✏️ MEDIOS DE PAGO: ajusta según lo que reciba el negocio -->
+      <p><span class="por-completar">Efectivo, Nequi, Daviplata… (ajusta según tu negocio)</span></p>
+    </details>
+    <details>
+      <summary>¿Venden por cantidad para restaurantes o tiendas?</summary>
+      <p>Escríbenos por WhatsApp contándonos cuántos huevos necesitas y con qué frecuencia, y te damos una respuesta.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============================ LLAMADO FINAL ============================ -->
+<section class="llamado">
+  <div class="contenedor">
+    <h2>¿Ya sabes qué vas a desayunar mañana?</h2>
+    <p>Los huevos criollos frescos vuelan. Separa los tuyos hoy y pasa a recogerlos cuando quieras.</p>
+    <div class="acciones" style="justify-content:center">
+      <a class="btn btn-whatsapp js-whatsapp" href="#" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>Pedir por WhatsApp
+      </a>
+      <a class="btn btn-borde" href="#ubicacion">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="contenedor">
+    <div><b>San Marcos · Huevos criollos</b><br>Agustín Codazzi, Cesar, Colombia</div>
+    <div>© <span id="anio"></span> San Marcos. Precios en pesos colombianos, sujetos a cambios.</div>
+  </div>
+</footer>
+
+<a class="flotante js-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>
+</a>
+
+<script>
+/* ==================================================================
+   ✏️ CONFIGURACIÓN — cambia aquí los datos del negocio
+   ================================================================== */
+const CONFIG = {
+  // Número de WhatsApp con indicativo de Colombia (57), sin espacios ni "+".
+  // Ejemplo: "573001234567"
+  whatsapp: "57XXXXXXXXXX",
+
+  // Enlace "src" del mapa de Google Maps (Compartir → Insertar un mapa).
+  // Déjalo vacío ("") mientras no lo tengas.
+  mapa: "",
+
+  // Precios de cada empaque (en pesos)
+  precios: { 6: 10000, 12: 15000, 20: 18000 }
+};
+
+/* ================================================================== */
+
+const pesos = n => "$" + n.toLocaleString("es-CO");
+const numeroListo = /^57\d{10}$/.test(CONFIG.whatsapp);
+
+function enlaceWhatsapp(texto) {
+  const base = numeroListo ? "https://wa.me/" + CONFIG.whatsapp : "https://wa.me/";
+  return base + "?text=" + encodeURIComponent(texto);
+}
+
+// Botones generales de WhatsApp
+document.querySelectorAll(".js-whatsapp").forEach(a => {
+  a.href = enlaceWhatsapp("¡Hola, San Marcos! Quiero información sobre los huevos criollos 🥚");
+});
+
+// Teléfono visible
+const tel = document.getElementById("telefono-visible");
+if (numeroListo) {
+  const n = CONFIG.whatsapp.slice(2);
+  tel.textContent = "+57 " + n.slice(0, 3) + " " + n.slice(3, 6) + " " + n.slice(6);
+} else {
+  tel.innerHTML = '<span class="por-completar">Escribe tu número en CONFIG.whatsapp</span>';
+}
+
+// Mapa
+if (CONFIG.mapa) {
+  const caja = document.getElementById("mapa");
+  caja.classList.add("con-mapa");
+  caja.innerHTML = "";
+  const iframe = document.createElement("iframe");
+  iframe.src = CONFIG.mapa;
+  iframe.loading = "lazy";
+  iframe.title = "Ubicación de San Marcos en Google Maps";
+  iframe.referrerPolicy = "no-referrer-when-downgrade";
+  caja.appendChild(iframe);
+}
+
+// Espacios de foto: si la imagen no existe, se muestra un recuadro con instrucciones
+document.querySelectorAll(".foto img").forEach(img => {
+  const figura = img.parentElement;
+  const archivo = img.getAttribute("src");
+  const mostrarAviso = () => {
+    img.remove();
+    const aviso = document.createElement("div");
+    aviso.className = "aviso-foto";
+    aviso.innerHTML =
+      '<svg><use href="#i-foto"/></svg><strong>Espacio para tu foto</strong>' +
+      "Guarda la imagen como<code>" + archivo + "</code>";
+    figura.appendChild(aviso);
+  };
+  if (img.complete && img.naturalWidth === 0) mostrarAviso();
+  else {
+    img.addEventListener("error", mostrarAviso, { once: true });
+    img.addEventListener("load", () => figura.classList.add("cargada"), { once: true });
+    if (img.complete && img.naturalWidth > 0) figura.classList.add("cargada");
+  }
+});
+
+// Calculadora de pedido
+const cantidades = { 6: 0, 12: 0, 20: 0 };
+const totalEl = document.getElementById("total");
+const resumenEl = document.getElementById("resumen");
+const enviarBtn = document.getElementById("enviar");
+
+function actualizar() {
+  let total = 0, huevos = 0;
+  for (const p in cantidades) {
+    total += cantidades[p] * CONFIG.precios[p];
+    huevos += cantidades[p] * Number(p);
+    document.querySelector('.contador[data-producto="' + p + '"] output').textContent = cantidades[p];
+  }
+  totalEl.textContent = pesos(total);
+  resumenEl.textContent = huevos
+    ? "Te llevas " + huevos + " huevos criollos (" + pesos(Math.round(total / huevos)) + " por huevo en promedio)."
+    : "Aún no has agregado empaques.";
+  enviarBtn.disabled = huevos === 0;
+}
+
+document.querySelectorAll(".contador").forEach(c => {
+  c.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    const p = c.dataset.producto;
+    cantidades[p] = Math.max(0, Math.min(99, cantidades[p] + Number(b.dataset.paso)));
+    actualizar();
+  });
+});
+
+document.querySelectorAll(".js-agregar").forEach(a => {
+  a.addEventListener("click", () => {
+    cantidades[a.dataset.producto]++;
+    actualizar();
+  });
+});
+
+enviarBtn.addEventListener("click", () => {
+  const nombre = document.getElementById("nombre").value.trim();
+  const hora = document.getElementById("hora").value.trim();
+  let total = 0;
+  const lineas = [];
+  for (const p in cantidades) {
+    if (!cantidades[p]) continue;
+    const sub = cantidades[p] * CONFIG.precios[p];
+    total += sub;
+    lineas.push("• " + cantidades[p] + " × empaque de " + p + " huevos = " + pesos(sub));
+  }
+  const texto =
+    "¡Hola, San Marcos! 🥚 Quiero separar este pedido para RECOGER en el local:\n\n" +
+    lineas.join("\n") +
+    "\n\nTotal: " + pesos(total) +
+    (nombre ? "\nNombre: " + nombre : "") +
+    (hora ? "\nPaso a recoger: " + hora : "") +
+    "\n\n¿Me confirman disponibilidad? ¡Gracias!";
+  window.open(enlaceWhatsapp(texto), "_blank", "noopener");
+});
+
+actualizar();
+document.getElementById("anio").textContent = new Date().getFullYear();
+
+// Animación al hacer scroll
+if ("IntersectionObserver" in window) {
+  const obs = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add("visible"); obs.unobserve(en.target); }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll(".revelar").forEach(el => obs.observe(el));
+} else {
+  document.querySelectorAll(".revelar").forEach(el => el.classList.add("visible"));
+}
+</script>
+</body>
+</html>

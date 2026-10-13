@@ -13,3 +13,12 @@ Funciones: copiar texto, descargar en Word (.doc) e imprimir o guardar como PDF.
 Es una sola página HTML sin dependencias: basta con abrir `generador-documentos/index.html` o publicarla con GitHub Pages.
 
 > Aviso: es una herramienta de redacción con modelos generales; no reemplaza la asesoría de un abogado.
+
+## San Marcos · Huevos criollos (`huevos-san-marcos/`)
+
+Página de venta para un comercio de huevos criollos en Agustín Codazzi (Cesar). Incluye precios por empaque (6, 12 y 20 huevos), calculadora de pedido que arma el mensaje de WhatsApp para recoger en el local (no hay domicilios), galería, opiniones, ubicación con mapa y preguntas frecuentes.
+
+Para personalizarla:
+- **Fotos:** guárdalas en `huevos-san-marcos/imagenes/` con los nombres de `imagenes/LEEME.md`.
+- **Dirección, horario, medios de pago y opiniones:** busca los comentarios `✏️` en `index.html` (los espacios pendientes se ven resaltados en amarillo).
+- **WhatsApp y mapa:** cambia `CONFIG.whatsapp` y `CONFIG.mapa` al final de `index.html`.
